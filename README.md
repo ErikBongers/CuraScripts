@@ -7,6 +7,7 @@ It shows the following at the LCD screen:
   - The filename or a user text
   - The current layer being printed
   - The total number of layers
+
 The length of the full text line is limited to 21 characters, which is the limit of the LCD on an Ender 3 printer.
 The filename or user text is trimmed to accomodate this, so that the layer numbers are always in view.
 The layer numbering starts at 1, as opposed to 0-based indexing. (not all 3D-printer users are programmers :) )
