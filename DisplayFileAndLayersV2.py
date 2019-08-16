@@ -36,14 +36,23 @@ class DisplayFileAndLayersV2(Script):
         }"""
     
     def execute(self, data):
+        maxLineLen = 19 # change this value for longer or shorter line lenghts on the display of your printer.
         if self.getSettingValueByKey("name") != "":
             name = self.getSettingValueByKey("name")
         else:
             name = Application.getInstance().getPrintInformation().jobName       
         i = 1
+        layerCnt = 0
         for layer in data:
-            txtLayers = str(i) + "/" + str(len(data))
-            display_text = "M117 " + name[0:20-len(txtLayers)] + " " + txtLayers
+            layer_index = data.index(layer)
+            lines = layer.split("\n")
+            for line in lines:
+                if line.startswith(";LAYER:"):
+                    layerCnt += 1
+
+        for layer in data:
+            txtLayers = str(i) + "/" + str(layerCnt)
+            display_text = "M117 " + name[0:maxLineLen-len(txtLayers)] + " " + txtLayers
             layer_index = data.index(layer)
             lines = layer.split("\n")
             for line in lines:
